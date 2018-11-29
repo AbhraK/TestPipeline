@@ -1,38 +1,39 @@
 pipeline {
-  agent any
-  stages {
-    stage("Build"){
-	steps{
-	  echo 'Its Build Stage'
-	}
+ agent any
+ stages {
+  stage("Build"){
+   steps{
+	echo 'Its Build Stage'
     }
-    stage("Test"){
+   }
+   stage("Test"){
 	steps{
-	  echo 'Its Test Stage'
+	 echo 'Its Test Stage'
 	}
-    }
-    stage("Branch"){
-        when {
-	  not{
-	     branch "master"
-          }		
+   }
+   stage("Branch"){
+    when {
+	 not{
+	  branch "master"
+     }		
 	}
 	steps{
-	  echo "Master Branch..!!"
+	 echo "Master Branch..!!"
 	}
-    }
-    stage("Deploy"){
+   }
+   stage("Deploy"){
 	parallel{
-          stage("UAT Deploy"){
-	    steps{
-	      echo 'Its UAT Deploy Stage'
-	    }
-	  }
-	  stage("Production Deploy"){
-	    steps{
-	      echo 'Its Production Deploy Stage'
-	    }
+     stage("UAT Deploy"){
+	  steps{
+	   echo 'Its UAT Deploy Stage'
 	  }
 	}
-    }  
+	stage("Production Deploy"){
+	 steps{
+	  echo 'Its Production Deploy Stage'
+	 }
+	}
+   }
+  }
+ }
 }

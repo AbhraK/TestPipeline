@@ -18,13 +18,21 @@ pipeline {
           }		
 	}
 	steps{
-	  echo "Not Master Branch..!!"
+	  echo "Master Branch..!!"
 	}
     }
     stage("Deploy"){
-	steps{
-	  echo 'Its DeployStage'
+	parallel{
+          stage("UAT Deploy"){
+	    steps{
+	      echo 'Its UAT Deploy Stage'
+	    }
+	  }
+	  stage("Production Deploy"){
+	    steps{
+	      echo 'Its Production Deploy Stage'
+	    }
+	  }
 	}
-    }
-  }
+    }  
 }

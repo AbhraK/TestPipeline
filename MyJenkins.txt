@@ -11,9 +11,14 @@ pipeline {
 	  echo 'Its Test Stage'
 	}
     }
-    stage("Package"){
+    stage("Branch"){
+        when {
+	  not{
+	     branch "master"
+          }		
+	}
 	steps{
-  	  echo 'Its Package Stage'
+	  echo "Not Master Branch..!!"
 	}
     }
     stage("Deploy"){
